@@ -1,21 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import { QuizSelectionScreen } from './QuizSelection.js'
+import { QuizScaledBackScreen } from './QuizScaledBack.js'
+import { QuizOrnateScreen } from './QuizOrnate.js'
+import { QuizResultScreen } from './QuizResult.js'
+
+const Stack = createStackNavigator();
+
+export default class App extends React.Component {
+
+  render() {
+    return <NavigationContainer>
+      <Stack.Navigator initialRouteName="QuizSelection" screenOptions = {{ title: 'Furniture Quiz', headerTitleStyle: { textAlign: 'center' } }}>
+        <Stack.Screen name="QuizSelection" component={QuizSelectionScreen}/>
+        <Stack.Screen name="QuizScaledBack" component={QuizScaledBackScreen}/>
+        <Stack.Screen name="QuizOrnate" component={QuizOrnateScreen}/>
+        <Stack.Screen name="QuizResult" component={QuizResultScreen} initialParams = {{ points: 10 }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
